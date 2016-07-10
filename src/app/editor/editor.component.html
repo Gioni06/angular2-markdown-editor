@@ -1,0 +1,8 @@
+<div class="editor-split-view">
+  <div class="editor">
+    <textarea #rawMarkdown (keyup)="convert(rawMarkdown.value)">{{markdown}}</textarea>
+  </div>
+  <div class="preview" [innerHtml]="preview">
+
+  </div>
+</div>

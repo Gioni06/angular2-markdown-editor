@@ -7,11 +7,31 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  '@angular2-material': 'vendor/@angular2-material',
+  'showdown': 'vendor/showdown'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'showdown': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'dist/showdown.js'
+  }
 };
+
+// put the names of any of your Material components here
+const materialPkgs:string[] = [
+  'core',
+  'icon',
+  'toolbar',
+  'button',
+  'sidenav'
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -34,6 +54,7 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/editor',
   /** @cli-barrel */
 ];
 

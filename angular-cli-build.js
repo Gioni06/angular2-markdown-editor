@@ -4,10 +4,19 @@
 
 /* global require, module */
 
-var Angular2App = require('angular-cli/lib/broccoli/angular2-app');
+const Angular2App = require('angular-cli/lib/broccoli/angular2-app');
+const compileSass = require('broccoli-sass');
+const mergeTrees = require('broccoli-merge-trees');
+const _ = require('lodash');
+const glob = require('glob');
 
 module.exports = function(defaults) {
-  return new Angular2App(defaults, {
+  var appTree = new Angular2App(defaults, {
+    sassCompiler: {
+            includePaths: [
+            'src/styles'
+            ]
+        },
     vendorNpmFiles: [
       'systemjs/dist/system-polyfills.js',
       'systemjs/dist/system.src.js',
@@ -15,7 +24,10 @@ module.exports = function(defaults) {
       'es6-shim/es6-shim.js',
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
-      '@angular/**/*.+(js|js.map)'
-    ]
+      '@angular/**/*.+(js|js.map)',
+      '@angular2-material/**/*',
+      'showdown/dist/showdown.js'
+      ]
   });
+  return mergeTrees([appTree], { overwrite: true });   
 };
